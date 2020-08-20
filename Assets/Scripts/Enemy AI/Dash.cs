@@ -56,6 +56,7 @@ public class Dash : MonoBehaviour
 
         #endregion
 
+
         #region Dashing
         if (rBody.position.x < dashLocation && rBody.position.x > leftBound)
         {
