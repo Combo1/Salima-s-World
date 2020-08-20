@@ -27,7 +27,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        currentState.OnCollisionEnter2D(this);
+        if (collision.gameObject.tag == "Ground")
+        {
+            currentState.OnCollisionEnter2D(this);
+        }
+        else if (collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Enemy")
+        {
+            Kill();
+        }
     }
 
     private void MovePlayer()
@@ -40,12 +47,17 @@ public class PlayerController : MonoBehaviour
             horizontalMovement += transform.position.x;
 
             float limit =
-                Mathf.Clamp(horizontalMovement, ScreenBounds.left, ScreenBounds.right);
+                Mathf.Clamp(horizontalMovement, ScreenBounds.left(), ScreenBounds.right());
 
             transform.position = new Vector2(limit, transform.position.y);
         }
     }
 
+    private void Kill()
+    {
+        Destroy(gameObject);
+        Debug.Log("Game Over!");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -60,4 +72,5 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         currentState.Update(this);
     }
+
 }
