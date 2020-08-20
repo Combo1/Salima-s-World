@@ -6,8 +6,8 @@ public class Patrol : MonoBehaviour
 {
     public float speed;
 
-    float fMinX = -8.5f;
-    float fMaxX = 8.5f;
+    float leftBound = -8.5f;
+    float rightBound = 8.5f;
 
     bool isMovingLeft = true;
 
@@ -28,7 +28,7 @@ public class Patrol : MonoBehaviour
         if(isMovingLeft == true)
         {
             //Change Direction
-            if (rBody.position.x < fMinX)
+            if (rBody.position.x < leftBound)
             {
                 isMovingLeft = false;
             }
@@ -36,7 +36,7 @@ public class Patrol : MonoBehaviour
         else
         {
             // Change Direction
-            if (rBody.position.x > fMaxX)
+            if (rBody.position.x > rightBound)
             {
                 isMovingLeft = true;
             }
