@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rBody;
     private PlayerBaseState currentState;
+
+    public Text gameOverText;
+    public RectTransform gameOverPanel;
+
 
     public readonly PlayerIdleState idleState = new PlayerIdleState();
     public readonly PlayerJumpingState jumpingState = new PlayerJumpingState();
@@ -56,12 +61,14 @@ public class PlayerController : MonoBehaviour
     private void Kill()
     {
         Destroy(gameObject);
-        Debug.Log("Game Over!");
+        //Enable Text
+        gameOverPanel.gameObject.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOverPanel.gameObject.SetActive(false);
         rBody = GetComponent<Rigidbody2D>();
         currentState = idleState;
     }
